@@ -9,6 +9,6 @@ services:
       - key: GEMINI_API_KEY
         sync: false
       - key: GEMINI_MODEL
-        value: gemini-2.5-flash
+        value: gemini-3.1-pro-preview
       - key: ALLOWED_ORIGINS
-        value: '*'
+        value: https://vivek-kumar1-smart.github.io
