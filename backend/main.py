@@ -70,7 +70,16 @@ def generate(req: GenerateRequest):
         raise HTTPException(status_code=503, detail="AI backend is not configured yet. Add GEMINI_API_KEY as a server environment variable. No payment is made by this app.")
     prompt = make_prompt(req)
     url = f"https://generativelanguage.googleapis.com/v1beta/models/{MODEL}:generateContent?key={API_KEY}"
-    payload = {"contents": [{"parts": [{"text": prompt}]}], "generationConfig": {"temperature": 0.35, "responseMimeType": "application/json"}}
+    payload = {
+    "contents": [{"parts": [{"text": prompt}]}],
+    "generationConfig": {
+        "temperature": 0.35,
+        "responseMimeType": "application/json",
+        "thinkingConfig": {
+            "thinkingLevel": "HIGH"
+        }
+    }
+    }
     data = json.dumps(payload).encode("utf-8")
     request = urllib.request.Request(url, data=data, headers={"Content-Type": "application/json"}, method="POST")
     try:
